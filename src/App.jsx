@@ -10,8 +10,8 @@ const sections = [
 ]
 
 function Brand() {
-  return <a className="flex items-center gap-3 font-extrabold tracking-[-.05em]" href="#top" aria-label="CydraShield home">
-    <span className="brand-mark"><i /></span><span>CydraShield</span>
+  return <a className="brand-wordmark font-extrabold tracking-[-.05em]" href="#top" aria-label="CydraShield home">
+    CydraShield
   </a>
 }
 
@@ -19,14 +19,16 @@ function Header() {
   const [open, setOpen] = useState(false)
   return <header className="sticky top-0 z-40 border-b border-[#dce2e0] bg-[#f3f5f4]/95 backdrop-blur-xl">
     <div className="site-wrap flex h-[70px] items-center justify-between">
-      <Brand />
+      <div className="flex items-center gap-3 sm:contents">
+        <button className="p-2 sm:hidden" onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>
+          {open ? <X size={21} /> : <Menu size={21} />}
+        </button>
+        <Brand />
+      </div>
       <nav className={`${open ? 'mobile-nav-open' : 'mobile-nav-closed'} nav-links`}>
         {sections.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
       </nav>
       <a className="button button-dark hidden sm:inline-flex" href="#demo">Request a demo <ArrowUpRight size={14} /></a>
-      <button className="p-2 sm:hidden" onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>
-        {open ? <X size={21} /> : <Menu size={21} />}
-      </button>
     </div>
   </header>
 }
